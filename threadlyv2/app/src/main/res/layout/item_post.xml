@@ -1,0 +1,105 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/post_background"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:clipToPadding="false">
+
+    <!-- Profile Picture -->
+    <ImageView
+        android:id="@+id/imageProfilePicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:src="@drawable/ic_default_pfp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_background"
+        android:layout_marginRight="12dp" />
+
+    <!-- Post Content -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- User Info -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/textUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ky Yanga"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_bold"/>
+
+            <TextView
+                android:id="@+id/textHandle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="_kylamaeee"
+                android:textSize="12sp"
+                android:textColor="#888888" />
+        </LinearLayout>
+
+        <!-- Post Title -->
+        <TextView
+            android:id="@+id/textPostTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/poppins_bold"
+            />
+
+        <!-- Post Body -->
+        <TextView
+            android:id="@+id/textPostBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="empore incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+            android:textColor="#666666"
+            android:lineSpacingExtra="2dp"
+            android:fontFamily="@font/poppins_regular"/>
+
+        <!-- Interaction Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/textLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:drawableLeft="@drawable/ic_like"
+                android:drawablePadding="4dp"
+                android:layout_marginRight="16dp"
+                android:textColor="#666666"
+                />
+
+            <TextView
+                android:id="@+id/textComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:drawableLeft="@drawable/ic_comment"
+                android:drawablePadding="4dp"
+                android:textColor="#666666" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

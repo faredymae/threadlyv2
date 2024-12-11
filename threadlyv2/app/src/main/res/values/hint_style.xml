@@ -1,0 +1,9 @@
+<resources>
+    <style  name="CustomHintStyle">
+        <item name="android:textColorHint">#9E9E9E</item> <!-- Customize hint color -->
+        <item name="android:fontFamily">@font/poppins_regular</item> <!-- Customize font -->
+        <item name="android:textSize">14sp</item> <!-- Customize text size -->
+        <item name="android:padding">10sp</item>
+
+    </style>
+</resources>
