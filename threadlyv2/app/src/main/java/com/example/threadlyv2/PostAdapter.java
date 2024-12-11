@@ -56,6 +56,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         // Bind other post details
+        holder.fullname.setText(post.getFullname());  // Set fullname
         holder.username.setText(post.getUsername());
         holder.postTitle.setText(post.getPostTitle());
         holder.postBody.setText(post.getPostBody());
@@ -113,15 +114,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     // ViewHolder class to hold references to the views in each item layout
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        TextView username, handle, postTitle, postBody, postCreatedAt;
+        TextView username, fullname, postTitle, postBody, postCreatedAt;
         ImageView profilePicture;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Find views from the item_post.xml layout
-            username = itemView.findViewById(R.id.textUsername);
-            handle = itemView.findViewById(R.id.textHandle);
+            fullname = itemView.findViewById(R.id.textUsername);
+            username = itemView.findViewById(R.id.textHandle);
             postTitle = itemView.findViewById(R.id.textPostTitle);
             postBody = itemView.findViewById(R.id.textPostBody);
             profilePicture = itemView.findViewById(R.id.imageProfilePicture);

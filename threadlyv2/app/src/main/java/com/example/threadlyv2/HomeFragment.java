@@ -3,6 +3,7 @@ package com.example.threadlyv2;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,22 +50,26 @@ public class HomeFragment extends Fragment {
     // Method to fetch posts from the database and convert them into Post objects
     private List<Post> fetchPostsFromDatabase() {
         List<Post> postList = new ArrayList<>();
-        Cursor cursor = databaseHelper.getAllPosts();
+        Cursor cursor = databaseHelper.getAllPosts();  // This works fine
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String username = cursor.getString(cursor.getColumnIndex("username"));
                 String postTitle = cursor.getString(cursor.getColumnIndex("post_title"));
                 String postBody = cursor.getString(cursor.getColumnIndex("post_body"));
-                String createdAt = cursor.getString(cursor.getColumnIndex("created_at")); // Fetch created_at as String
+                String createdAt = cursor.getString(cursor.getColumnIndex("created_at"));
+                Log.d("HomeFragment", "Fetched created_at: " + createdAt);  // Debugging log
 
-                String profileImageUri = fetchProfileImageUrl(username);
 
-                postList.add(new Post(username, postTitle, postBody, 12, 10, profileImageUri, createdAt)); // Pass createdAt as String
+                String profileImageUri = fetchProfileImageUrl(username);  // Assuming this method works fine
+
+                // Corrected line: Calling fetchFullnameForUsername via databaseHelper
+                String fullname = databaseHelper.fetchFullnameForUsername(username);  // Use the instance of DatabaseHelper
+
+                postList.add(new Post(fullname, username, postTitle, postBody, 12, 10, profileImageUri, createdAt)); // Pass createdAt as String
             } while (cursor.moveToNext());
             cursor.close();
         }
-
 
         return postList;
     }

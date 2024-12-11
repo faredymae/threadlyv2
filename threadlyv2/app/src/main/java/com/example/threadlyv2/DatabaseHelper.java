@@ -103,6 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("post_title", postTitle);
         contentValues.put("post_body", postBody);
 
+
         try {
             long result = db.insert(TABLE_NAME_POST, null, contentValues);
             return result != -1;
@@ -170,6 +171,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query("allusers", new String[]{"profile_picture"}, "username = ?", new String[]{username}, null, null, null);
     }
+
+    public  String fetchFullnameForUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();  // Use 'this' since you're inside the DatabaseHelper class
+        Cursor cursor = db.rawQuery("SELECT fullname FROM allusers WHERE username = ?", new String[]{username});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String fullname = cursor.getString(cursor.getColumnIndex("fullname"));
+            cursor.close();
+            return fullname;
+        }
+
+        return ""; // Return an empty string if no fullname is found
+    }
+
+
+
+
+
+
 
 
 

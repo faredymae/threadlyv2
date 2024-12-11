@@ -1,6 +1,7 @@
 package com.example.threadlyv2;
 
 public class Post {
+    private String fullname;
     private String username;
     private String postTitle;
     private String postBody;
@@ -9,8 +10,11 @@ public class Post {
     private String createdAt; // Time
     private String profileImageUri; // Add this field
 
+
+
     // Constructor
-    public Post(String username, String postTitle, String postBody, int likes, int comments, String profileImageUri, String createdAt) {
+    public Post(String fullname, String username, String postTitle, String postBody, int likes, int comments, String profileImageUri, String createdAt) {
+        this.fullname = fullname;
         this.username = username;
         this.postTitle = postTitle;
         this.postBody = postBody;
@@ -21,6 +25,14 @@ public class Post {
     }
 
     // Getters and setters
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
     public String getCreatedAt() {
         return createdAt;
     }
