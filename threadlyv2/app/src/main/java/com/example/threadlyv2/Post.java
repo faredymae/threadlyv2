@@ -4,19 +4,32 @@ public class Post {
     private String username;
     private String postTitle;
     private String postBody;
-    private int likes;
-    private int comments;
+    private int likes;  // like counter
+    private int comments;  // comment counter
+    private String profileImageUri; // Add this field
+
+
 
     // Constructor
-    public Post(String username, String postTitle, String postBody, int likes, int comments) {
+    public Post(String username, String postTitle, String postBody, int likes, int comments, String profileImageUri ) {
         this.username = username;
         this.postTitle = postTitle;
         this.postBody = postBody;
         this.likes = likes;
         this.comments = comments;
+        this.profileImageUri = profileImageUri; // Initialize profile image URI
+
     }
 
     // Getters and setters
+
+    public String getProfileImageUri() {
+        return profileImageUri;
+    }
+
+    public void setProfileImageUri(String profileImageUri) {
+        this.profileImageUri = profileImageUri;
+    }
     public String getUsername() {
         return username;
     }

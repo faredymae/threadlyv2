@@ -33,14 +33,21 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false); // Inflate the layout
+        // Inflate the layout for this fragment
+        Log.d("ProfileFragment", "onCreateView called");
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("ProfileFragment", "onViewCreated called");
 
         profileImageView = view.findViewById(R.id.profileImageView);
+
+        if (profileImageView == null) {
+            Log.e("ProfileFragment", "ProfileImageView is null");
+        }
 
         // Initialize the image picker launcher
         imagePickerLauncher = registerForActivityResult(
@@ -54,7 +61,7 @@ public class ProfileFragment extends Fragment {
                             updateProfileImage(selectedImageUri);
                             saveImageUri(selectedImageUri); // Save the URI to SharedPreferences
                         } else {
-                            Log.d("ProfileFragment", "No image selected or data is null");
+                            Log.e("ProfileFragment", "No image selected or data is null");
                         }
                     } else {
                         Log.d("ProfileFragment", "Image selection cancelled");
@@ -64,8 +71,12 @@ public class ProfileFragment extends Fragment {
 
         // Load and display the saved profile image, if any
         Uri savedImageUri = loadImageUri();
+
         if (savedImageUri != null) {
             updateProfileImage(savedImageUri);
+        } else {
+            // Load default image if no saved URI is found
+            updateProfileImage(null); // Glide will use the placeholder in this case
         }
 
         // Set onClickListener to the profileImageView
@@ -94,60 +105,67 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-
     private void launchImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         Log.d("ProfileFragment", "Launching image picker intent...");
         imagePickerLauncher.launch(intent);
     }
 
-    // Check if the app has the MANAGE_EXTERNAL_STORAGE permission (for Android 11 and above)
-    private boolean isExternalStorageManager() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && android.os.Environment.isExternalStorageManager();
-    }
-
-    // Request the MANAGE_EXTERNAL_STORAGE permission
-    private void requestManageExternalStoragePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            // Check if the intent is available before trying to start it
-            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                try {
-                    startActivityForResult(intent, REQUEST_CODE_PERMISSION);
-                } catch (Exception e) {
-                    Log.e("ProfileFragment", "Unable to open settings for external storage permission", e);
-                    Toast.makeText(requireContext(), "Unable to open settings. Please enable the permission manually in Settings.", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                // If the intent isn't supported, show a message
-                Log.e("ProfileFragment", "Settings activity not found for managing external storage permission.");
-                Toast.makeText(requireContext(), "This device does not support broad file access. Please enable the permission manually.", Toast.LENGTH_LONG).show();
-            }
+    // Updates the profile image using Glide
+    private void updateProfileImage(Uri imageUri) {
+        Log.d("ProfileFragment", "Updating profile image: " + (imageUri != null ? imageUri.toString() : "null"));
+        if (imageUri != null) {
+            Glide.with(this)
+                    .load(imageUri)
+                    .circleCrop() // Ensures the image is displayed as a circle
+                    .placeholder(R.drawable.ic_default_pfp) // Default profile picture placeholder
+                    .error(R.drawable.ic_default_pfp) // Error placeholder
+                    .into(profileImageView);
+        } else {
+            Glide.with(this)
+                    .load(R.drawable.ic_default_pfp) // Default placeholder
+                    .into(profileImageView);
         }
     }
 
-    // Updates the profile image using Glide
-    private void updateProfileImage(Uri imageUri) {
-        Log.d("ProfileFragment", "Updating profile image: " + imageUri.toString());
-        Glide.with(this)
-                .load(imageUri)
-                .circleCrop() // Ensures the image is displayed as a circle
-                .placeholder(R.drawable.ic_default_pfp) // Default profile picture placeholder
-                .error(R.drawable.ic_default_pfp) // Error placeholder
-                .into(profileImageView);
-    }
-
-    // Saves the image URI to SharedPreferences
+    // Saves the image URI to SharedPreferences and updates the database
     private void saveImageUri(Uri imageUri) {
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("profile_image", imageUri.toString()).apply();
+        try {
+            Log.d("ProfileFragment", "Saving image URI: " + imageUri.toString());
+
+            // Save the image URI to SharedPreferences
+            SharedPreferences sharedPreferences = requireContext().getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString("profile_image", imageUri.toString()).apply();
+
+            // Get the username from SharedPreferences (you can store this value during login)
+            SharedPreferences prefs = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+            String username = prefs.getString("username", null);
+
+            Log.d("ProfileFragment", "Retrieved username: " + username);
+            // Update the profile image URI in the database
+            if (username != null) {
+                DatabaseHelper databaseHelper = new DatabaseHelper(requireContext());
+                databaseHelper.updateUserProfileImage(username, imageUri.toString());
+                Log.d("ProfileFragment", "Profile image updated in database");
+            } else {
+                Log.e("ProfileFragment", "Username is null, cannot update database");
+            }
+        } catch (Exception e) {
+            Log.e("ProfileFragment", "Error saving image URI: " + e.getMessage(), e);
+        }
     }
 
     // Loads the saved image URI from SharedPreferences
     private Uri loadImageUri() {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
         String uriString = sharedPreferences.getString("profile_image", null);
-        return uriString != null ? Uri.parse(uriString) : null;
+
+        if (uriString != null) {
+            return Uri.parse(uriString);
+        } else {
+            // Fallback to default image if not found
+            return null;
+        }
     }
 
     // Handle permission request result
@@ -164,5 +182,4 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
-
 }

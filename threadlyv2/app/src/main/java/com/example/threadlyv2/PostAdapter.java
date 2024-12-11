@@ -10,12 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private Context context;
-    private List<Post> postList; // Post is your data model class
+    private List<Post> postList;
 
     // Constructor for the adapter
     public PostAdapter(Context context, List<Post> postList) {
@@ -32,33 +34,37 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-        // Get the post for the current position
+    public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = postList.get(position);
 
-        // Bind the post data to the views
+        // Load profile picture using Glide
+        String profileImageUri = post.getProfileImageUri();
+        if (profileImageUri != null && !profileImageUri.isEmpty()) {
+            Glide.with(context)
+                    .load(profileImageUri)
+                    .circleCrop() // Display profile image as a circle
+                    .placeholder(R.drawable.ic_default_pfp) // Placeholder in case of error or missing image
+                    .into(holder.profilePicture);
+        } else {
+            // If no image URI, show the default placeholder
+            holder.profilePicture.setImageResource(R.drawable.ic_default_pfp);
+        }
+
+        // Other post bindings (e.g., title, body)
         holder.username.setText(post.getUsername());
         holder.postTitle.setText(post.getPostTitle());
         holder.postBody.setText(post.getPostBody());
-        holder.handle.setText("@" + post.getUsername().toLowerCase());
-
-        // Set likes and comments (if available in your Post model)
-        holder.likes.setText(String.valueOf(post.getLikes()));
-        holder.comments.setText(String.valueOf(post.getComments()));
-
-        // Placeholder image for profile picture (update this with real data later)
-        holder.profilePicture.setImageResource(R.drawable.ic_default_pfp);
     }
 
     @Override
     public int getItemCount() {
-        return postList.size(); // Number of posts
+        return postList.size();
     }
 
     // ViewHolder class to hold references to the views in each item layout
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        TextView username, handle, postTitle, postBody, likes, comments;
+        TextView username, handle, postTitle, postBody;
         ImageView profilePicture;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -69,9 +75,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             handle = itemView.findViewById(R.id.textHandle);
             postTitle = itemView.findViewById(R.id.textPostTitle);
             postBody = itemView.findViewById(R.id.textPostBody);
-            likes = itemView.findViewById(R.id.textLikes);
-            comments = itemView.findViewById(R.id.textComments);
             profilePicture = itemView.findViewById(R.id.imageProfilePicture);
         }
+    }
+
+    public void updatePostList(List<Post> newPostList) {
+        this.postList = newPostList;
+        notifyDataSetChanged();
     }
 }

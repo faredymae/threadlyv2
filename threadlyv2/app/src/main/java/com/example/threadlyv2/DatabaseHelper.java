@@ -137,14 +137,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return valid;
     }
 
-    public Boolean updateProfilePicture(int userId, String imageUri) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("profile_picture", imageUri); // Save the image URI as string
 
-        int rowsUpdated = db.update(TABLE_NAME_USER, contentValues, "id = ?", new String[]{String.valueOf(userId)});
-        return rowsUpdated > 0; // Returns true if one or more rows were updated
-    }
+
 
     public String getProfilePicture(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -159,6 +153,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return null; // Return null if no profile picture is found
     }
+
+    public void updateUserProfileImage(String username, String imageUri) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("profile_picture", imageUri);  // Assuming the column is 'profile_picture'
+
+        // Update the 'allusers' table based on the username
+        db.update("allusers", values, "username = ?", new String[]{username});
+    }
+
+
+
+
+    public Cursor getUserProfile(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query("allusers", new String[]{"profile_picture"}, "username = ?", new String[]{username}, null, null, null);
+    }
+
 
 
 

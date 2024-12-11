@@ -1,105 +1,165 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@drawable/post_background"
-    android:padding="16dp"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    android:clipToPadding="false">
+    android:scrollbars="none"> <!-- Hide the scrollbar -->
 
-    <!-- Profile Picture -->
-    <ImageView
-        android:id="@+id/imageProfilePicture"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="top"
-        android:src="@drawable/ic_default_pfp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/circle_background"
-        android:layout_marginRight="12dp" />
-
-    <!-- Post Content -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:background="@drawable/post_background"
+        android:padding="15dp"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:clipToPadding="false">
 
-        <!-- User Info -->
+        <!-- Post Content -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="4dp">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textUsername"
+            <!-- User Info -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ky Yanga"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_bold"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
 
-            <TextView
-                android:id="@+id/textHandle"
-                android:layout_width="wrap_content"
+                <!-- Profile Picture -->
+                <ImageView
+                    android:id="@+id/imageProfilePicture"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/ic_default_pfp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginRight="12dp" />
+
+                <!-- User Info (Full Name and Handle) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Ky Yanga"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textHandle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="_kylamaeee"
+                        android:textColor="#38343a"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!-- Created At -->
+                <TextView
+                    android:id="@+id/textCreatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="150dp"
+                    android:gravity="end"
+                    android:text="12:00 PM"
+                    android:textColor="#38343a"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Post Title, Body, and Interaction Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="_kylamaeee"
-                android:textSize="12sp"
-                android:textColor="#888888" />
-        </LinearLayout>
+                android:orientation="vertical">
 
-        <!-- Post Title -->
-        <TextView
-            android:id="@+id/textPostTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/poppins_bold"
-            />
+                <!-- Post Title -->
+                <TextView
+                    android:id="@+id/textPostTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-        <!-- Post Body -->
-        <TextView
-            android:id="@+id/textPostBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="empore incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
-            android:textColor="#666666"
-            android:lineSpacingExtra="2dp"
-            android:fontFamily="@font/poppins_regular"/>
+                <!-- Post Body -->
+                <TextView
+                    android:id="@+id/textPostBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="empore incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                    android:textColor="#38343a" />
 
-        <!-- Interaction Row -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp">
+                <!-- Interaction Row (Likes and Comments aligned horizontally) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="13dp"
+                    android:gravity="start">
 
-            <TextView
-                android:id="@+id/textLikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="12"
-                android:drawableLeft="@drawable/ic_like"
-                android:drawablePadding="4dp"
-                android:layout_marginRight="16dp"
-                android:textColor="#666666"
-                />
+                    <!-- Likes Section -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="16dp">
 
-            <TextView
-                android:id="@+id/textComments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:drawableLeft="@drawable/ic_comment"
-                android:drawablePadding="4dp"
-                android:textColor="#666666" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_unlike" />
+
+                        <TextView
+                            android:id="@+id/textLikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:text="12"
+                            android:textColor="#38343a" />
+                    </LinearLayout>
+
+                    <!-- Comments Section -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/icc_comment" />
+
+                        <TextView
+                            android:id="@+id/textComments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:text="10"
+                            android:textColor="#38343a" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
