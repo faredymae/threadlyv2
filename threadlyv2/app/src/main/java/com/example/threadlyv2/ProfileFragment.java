@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,12 +31,39 @@ public class ProfileFragment extends Fragment {
     private static final int REQUEST_CODE_PERMISSION = 1;
     private ImageView profileImageView;
     private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private Button logoutBtn; // Declare logout button
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d("ProfileFragment", "onCreateView called");
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        // Find the logout button after inflating the view
+        logoutBtn = rootView.findViewById(R.id.logoutBtn); // Assuming the logout button has ID "logoutBtn"
+
+        // Set the logout button's click listener
+        logoutBtn.setOnClickListener(v -> {
+            // Clear SharedPreferences (session data)
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("profile_image");  // Remove the stored profile image URI
+            editor.remove("username");  // Optionally, remove username to reset session
+            editor.clear();  // Clear all the saved data
+            editor.apply();  // Apply the changes
+
+            // Immediately set the profile image to default
+            updateProfileImage(null); // Set default profile picture immediately
+
+            // Redirect to the Login screen
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+
+            // Finish the ProfileFragment (or ProfileActivity) to remove it from the back stack
+            getActivity().finish();
+        });
+
+        return rootView; // Return the rootView at the end
     }
 
     @Override

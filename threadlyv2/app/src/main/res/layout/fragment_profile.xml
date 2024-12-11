@@ -7,6 +7,13 @@
     tools:context=".ProfileFragment">
 
     <!-- LinearLayout for the banner section -->
+
+    <!-- Profile Image -->
+
+    <!-- User Name TextView -->
+
+    <!-- UserName TextView -->
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -15,6 +22,7 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -32,143 +40,74 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Profile Image -->
+    <!-- Number of Posts -->
 
-    <!-- User Name TextView -->
+    <!-- Number of Followers -->
+
+    <!-- Number of Following -->
+
+    <!-- Following Text -->
+
+    <!-- Posts Text -->
+
+    <!-- Followers Text -->
+
+    <!-- Logout Button -->
+
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_default_pfp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <!-- UserName TextView -->
-
-    <TextView
-        android:id="@+id/profTVName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Kyla Mae Yanga"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileImageView" />
 
     <TextView
         android:id="@+id/profTVUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_regular"
         android:text="_kylamaeee"
-        app:layout_constraintTop_toBottomOf="@id/profTVName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/profTVName" />
 
-    <!-- Number of Posts -->
     <TextView
-        android:id="@+id/profTVPost"
+        android:id="@+id/profTVName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="123"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Kyla Mae Yanga"
         android:textColor="@color/black"
-        android:textSize="34sp"
-        app:layout_constraintTop_toBottomOf="@id/profTVUserName"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
-    <!-- Number of Followers -->
-    <TextView
-        android:id="@+id/profTVFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="123"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        app:layout_constraintTop_toBottomOf="@id/profTVPost"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Number of Following -->
-    <TextView
-        android:id="@+id/profTVFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="123"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        app:layout_constraintTop_toBottomOf="@id/profTVFollowers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Following Text -->
-    <TextView
-        android:id="@+id/profTVNumFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Followings"
-        app:layout_constraintTop_toBottomOf="@id/profTVFollowing"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Posts Text -->
-    <TextView
-        android:id="@+id/profTVNumPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Post"
-        app:layout_constraintTop_toBottomOf="@id/profTVPost"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Followers Text -->
-    <TextView
-        android:id="@+id/profTVNumFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Followers"
-        app:layout_constraintTop_toBottomOf="@id/profTVFollowers"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Profile Edit Button (if needed) -->
-    <!-- You can remove this button if not necessary, or keep it if you plan to add functionality -->
     <Button
-        android:id="@+id/button"
+        android:id="@+id/logoutBtn"
         android:layout_width="97dp"
         android:layout_height="31dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/btn"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Edit Profile"
+        android:text="Logout"
         android:textAllCaps="false"
         android:textColor="@color/violet"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/profTVNumFollowers"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <!-- Guideline (optional, if you need it for some layout purposes) -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"

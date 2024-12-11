@@ -70,10 +70,10 @@
                     android:id="@+id/textCreatedAt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
+                    android:layout_marginStart="178dp"
                     android:gravity="end"
-                    android:text="12:00 PM"
-                    android:textColor="#38343a"
+                    android:text="1h"
+                    android:textColor="@color/lightgrey"
                     android:textSize="12sp" />
             </LinearLayout>
 

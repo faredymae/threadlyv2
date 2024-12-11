@@ -55,17 +55,19 @@ public class HomeFragment extends Fragment {
                 String username = cursor.getString(cursor.getColumnIndex("username"));
                 String postTitle = cursor.getString(cursor.getColumnIndex("post_title"));
                 String postBody = cursor.getString(cursor.getColumnIndex("post_body"));
+                String createdAt = cursor.getString(cursor.getColumnIndex("created_at")); // Fetch created_at as String
 
-                String profileImageUri = fetchProfileImageUrl(username); // Get profile image URI from the database
+                String profileImageUri = fetchProfileImageUrl(username);
 
-                // Add a Post object to the list
-                postList.add(new Post(username, postTitle, postBody, 12, 10, profileImageUri)); // Static likes/comments for now
+                postList.add(new Post(username, postTitle, postBody, 12, 10, profileImageUri, createdAt)); // Pass createdAt as String
             } while (cursor.moveToNext());
             cursor.close();
         }
 
+
         return postList;
     }
+
 
     // Fetch the profile image URL from the database using the username
     private String fetchProfileImageUrl(String username) {

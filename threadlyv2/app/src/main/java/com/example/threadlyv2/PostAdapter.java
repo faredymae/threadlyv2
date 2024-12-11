@@ -12,7 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
@@ -50,10 +55,54 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.profilePicture.setImageResource(R.drawable.ic_default_pfp);
         }
 
-        // Other post bindings (e.g., title, body)
+        // Bind other post details
         holder.username.setText(post.getUsername());
         holder.postTitle.setText(post.getPostTitle());
         holder.postBody.setText(post.getPostBody());
+
+        // Format and set the created_at timestamp
+        if (post.getCreatedAt() != null && !post.getCreatedAt().isEmpty()) {
+            String formattedDate = formatTimestamp(post.getCreatedAt());
+            holder.postCreatedAt.setText(formattedDate);
+        } else {
+            holder.postCreatedAt.setText("N/A"); // Fallback if created_at is missing
+        }
+    }
+
+    // timezone converted
+    public String formatTimestamp(String createdAt) {
+        try {
+            // Parse the 'createdAt' timestamp into a Date object
+            SimpleDateFormat databaseFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            databaseFormat.setTimeZone(TimeZone.getTimeZone("UTC")); // Ensure parsing is in UTC timezone
+            Date postDate = databaseFormat.parse(createdAt);
+
+            // Get the current time and local timezone
+            long currentTime = System.currentTimeMillis();
+
+            // Calculate the difference in milliseconds
+            long timeDifference = currentTime - postDate.getTime();
+
+            // Convert the difference into seconds, minutes, hours, etc.
+            long seconds = timeDifference / 1000;
+            long minutes = seconds / 60;
+            long hours = minutes / 60;
+            long days = hours / 24;
+
+            // Return a formatted string depending on the time difference
+            if (seconds < 60) {
+                return seconds + "s";
+            } else if (minutes < 60) {
+                return minutes + "m";
+            } else if (hours < 24) {
+                return hours + "h";
+            } else {
+                return days + "d";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return createdAt; // Return raw timestamp in case of error
+        }
     }
 
     @Override
@@ -64,7 +113,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     // ViewHolder class to hold references to the views in each item layout
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        TextView username, handle, postTitle, postBody;
+        TextView username, handle, postTitle, postBody, postCreatedAt;
         ImageView profilePicture;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -76,6 +125,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             postTitle = itemView.findViewById(R.id.textPostTitle);
             postBody = itemView.findViewById(R.id.textPostBody);
             profilePicture = itemView.findViewById(R.id.imageProfilePicture);
+            postCreatedAt = itemView.findViewById(R.id.textCreatedAt); // Make sure this ID matches your layout
+
         }
     }
 
