@@ -1,30 +1,67 @@
 package com.example.threadlyv2;
 
 public class Post {
+    private int postID;
     private String fullname;
     private String username;
     private String postTitle;
     private String postBody;
-    private int likes;  // like counter
-    private int comments;  // comment counter
+    private int likeCount;  // like counter
+    private int commentCount;  // comment counter
     private String createdAt; // Time
     private String profileImageUri; // Add this field
+    private boolean likedByUser;  // To track if the current user has liked the post
 
 
 
     // Constructor
-    public Post(String fullname, String username, String postTitle, String postBody, int likes, int comments, String profileImageUri, String createdAt) {
+    public Post(int postID, String fullname, String username, String postTitle, String postBody, int likeCount, int comments, String profileImageUri, String createdAt, boolean likedByUser) {
+        this.postID = postID;
         this.fullname = fullname;
         this.username = username;
         this.postTitle = postTitle;
         this.postBody = postBody;
-        this.likes = likes;
-        this.comments = comments;
+        this.likeCount = likeCount;
+        this.commentCount = commentCount;
         this.profileImageUri = profileImageUri; // Initialize profile image URI
         this.createdAt = createdAt; // Initialize createdAt
+        this.likedByUser = likedByUser;
     }
 
     // Getters and setters
+
+
+    public int getPostID() {
+        return postID;
+    }
+
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public boolean isLikedByUser() {
+        return likedByUser;
+    }
+
+    public void setLikedByUser(boolean likedByUser) {
+        this.likedByUser = likedByUser;
+    }
 
     public String getFullname() {
         return fullname;
@@ -73,19 +110,5 @@ public class Post {
         this.postBody = postBody;
     }
 
-    public int getLikes() {
-        return likes;
-    }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public int getComments() {
-        return comments;
-    }
-
-    public void setComments(int comments) {
-        this.comments = comments;
-    }
 }

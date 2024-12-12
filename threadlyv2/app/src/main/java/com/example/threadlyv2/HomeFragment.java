@@ -54,10 +54,12 @@ public class HomeFragment extends Fragment {
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
+                int postID = cursor.getInt(cursor.getColumnIndex("post_id"));
                 String username = cursor.getString(cursor.getColumnIndex("username"));
                 String postTitle = cursor.getString(cursor.getColumnIndex("post_title"));
                 String postBody = cursor.getString(cursor.getColumnIndex("post_body"));
                 String createdAt = cursor.getString(cursor.getColumnIndex("created_at"));
+                int likeCount = cursor.getInt(cursor.getColumnIndex("like_count"));
                 Log.d("HomeFragment", "Fetched created_at: " + createdAt);  // Debugging log
 
 
@@ -66,7 +68,7 @@ public class HomeFragment extends Fragment {
                 // Corrected line: Calling fetchFullnameForUsername via databaseHelper
                 String fullname = databaseHelper.fetchFullnameForUsername(username);  // Use the instance of DatabaseHelper
 
-                postList.add(new Post(fullname, username, postTitle, postBody, 12, 10, profileImageUri, createdAt)); // Pass createdAt as String
+                postList.add(new Post(postID, fullname, username, postTitle, postBody, likeCount, 10, profileImageUri, createdAt, true)); // Pass createdAt as String
             } while (cursor.moveToNext());
             cursor.close();
         }
@@ -108,4 +110,17 @@ public class HomeFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("profile_image", imageUri.toString()).apply();
     }
+
+    private void saveLikeState(int postId, boolean isLiked) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LikePreferences", Context.MODE_PRIVATE);  // Use getActivity() to get the context
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("post_" + postId, isLiked);  // Storing the like state for each post by its ID
+        editor.apply();
+    }
+
+    private boolean isPostLiked(int postId) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LikePreferences", Context.MODE_PRIVATE);  // Use getActivity() to get the context
+        return sharedPreferences.getBoolean("post_" + postId, false);  // Default is false, meaning not liked
+    }
+
 }

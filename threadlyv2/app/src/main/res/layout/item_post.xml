@@ -113,13 +113,14 @@
                         android:layout_marginRight="16dp">
 
                         <ImageView
+                            android:id="@+id/likeButton"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/ic_unlike" />
 
                         <TextView
-                            android:id="@+id/textLikes"
+                            android:id="@+id/textLikeCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

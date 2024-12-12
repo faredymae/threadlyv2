@@ -52,6 +52,12 @@ public class ProfileFragment extends Fragment {
             editor.clear();  // Clear all the saved data
             editor.apply();  // Apply the changes
 
+            // Clear like data stored in SharedPreferences
+            SharedPreferences likePreferences = getActivity().getSharedPreferences("LikePreferences", Context.MODE_PRIVATE);
+            SharedPreferences.Editor likeEditor = likePreferences.edit();
+            likeEditor.clear();  // Clear all like data
+            likeEditor.apply();
+
             // Immediately set the profile image to default
             updateProfileImage(null); // Set default profile picture immediately
 
@@ -62,6 +68,7 @@ public class ProfileFragment extends Fragment {
             // Finish the ProfileFragment (or ProfileActivity) to remove it from the back stack
             getActivity().finish();
         });
+
 
         return rootView; // Return the rootView at the end
     }

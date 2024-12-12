@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_LIKE = "like";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 4); // Incremented version
+        super(context, DATABASE_NAME, null, 6); // Incremented version
     }
 
     @Override
@@ -63,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Create likes table
             db.execSQL("CREATE TABLE " + TABLE_NAME_LIKE + " (" +
+                    "like_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "post_id INTEGER NOT NULL, " +
                     "user_id INTEGER NOT NULL, " +
                     "PRIMARY KEY(post_id, user_id), " + // Composite key to prevent duplicate likes
@@ -76,9 +77,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_POST);
-        onCreate(db);
+        if (oldVersion < 5) {  // If the database version is less than 2, upgrade it
+            // Add the like_id column to the likes table
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIKE + " (" +
+                    "like_id INTEGER PRIMARY KEY AUTOINCREMENT, ))");
+
+        }
     }
 
     public Boolean insertData(String fullname, String username, String password, String confirmPassword) {
@@ -184,6 +188,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return ""; // Return an empty string if no fullname is found
     }
+
+    // Method to like a post
+    public void likePost(int postId, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Insert the like record into the likes table
+        ContentValues values = new ContentValues();
+        values.put("post_id", postId);
+        values.put("user_id", userId);
+        db.insert(TABLE_NAME_LIKE, null, values);
+
+        // Increment the like count in the posts table
+        db.execSQL("UPDATE " + TABLE_NAME_POST + " SET like_count = like_count + 1 WHERE post_id = ?", new Object[]{postId});
+
+        db.close();
+    }
+
+
+    // Method to unlike a post
+    public void unlikePost(int postId, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Delete the like record from the likes table
+        db.delete(TABLE_NAME_LIKE, "post_id = ? AND user_id = ?",
+                new String[]{String.valueOf(postId), String.valueOf(userId)});
+
+        // Decrement the like count in the posts table
+        db.execSQL("UPDATE " + TABLE_NAME_POST + " SET like_count = like_count - 1 WHERE post_id = ?", new Object[]{postId});
+
+        db.close();
+    }
+
+
+    // Method to check if a user has liked a post
+    public boolean isPostLikedByUser(int postId, int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Query to check if the user has already liked the post
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME_LIKE +
+                        " WHERE post_id = ? AND user_id = ?",
+                new String[]{String.valueOf(postId), String.valueOf(userId)});
+
+        boolean isLiked = cursor.getCount() > 0;
+        cursor.close();
+        return isLiked;
+    }
+
 
 
 
