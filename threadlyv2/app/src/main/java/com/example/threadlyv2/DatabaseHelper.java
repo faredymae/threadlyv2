@@ -78,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-         {  // If the database version is less than 2, upgrade it
+        if (oldVersion < 5) {  // If the database version is less than 2, upgrade it
             // Add the like_id column to the likes table
             db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIKE + " (" +
                     "like_id INTEGER PRIMARY KEY AUTOINCREMENT, ))");

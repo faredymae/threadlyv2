@@ -1,7 +1,9 @@
 package com.example.threadlyv2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.profilePicture.setImageResource(R.drawable.ic_default_pfp);
         }
 
+
         // Bind other post details
         holder.fullname.setText(post.getFullname());
         holder.username.setText(post.getUsername());
@@ -84,6 +87,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         // Handle like button click
         holder.likeButton.setOnClickListener(v -> toggleLike(post, position, holder));  // Add click listener to toggle like
+
+        holder.itemView.setOnClickListener(v -> {
+            Log.d("PostAdapter", "Item clicked: " + post.getPostID());
+
+            Intent intent = new Intent(context, PostDetailActivity.class);
+            intent.putExtra("postId", post.getPostID());
+            intent.putExtra("fullname", post.getFullname());
+            intent.putExtra("username", post.getUsername());
+            intent.putExtra("postTitle", post.getPostTitle());
+            intent.putExtra("postBody", post.getPostBody());
+            intent.putExtra("likeCount", post.getLikeCount());
+            intent.putExtra("commentCount", post.getCommentCount());
+            intent.putExtra("createdAt", post.getCreatedAt());
+            intent.putExtra("profileImageUri", post.getProfileImageUri()); // Pass profile image URI
+            context.startActivity(intent);
+
+            Log.d("PostAdapter", "Intent Data: " + post.getPostID() + ", " + post.getPostTitle());
+
+        });
+
+
     }
 
     private void toggleLike(Post post, int position, PostViewHolder holder) {

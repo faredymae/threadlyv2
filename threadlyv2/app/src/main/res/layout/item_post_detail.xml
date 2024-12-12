@@ -1,209 +1,239 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".PostDetailActivity">
 
-    <!-- Header Section -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingBottom="8dp">
-
-        <!-- User Profile Picture -->
-        <ImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_default_pfp" />
-
-        <!-- User Info -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/fullnamePD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Ky Yanga"
-                android:textColor="#38343a"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/usernamePD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:text="_kylamaeee"
-                android:textColor="#888888"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/post_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:fontFamily="@font/poppins_regular"
-                android:text="1 day ago"
-                android:textColor="#888888"
-                android:textSize="10sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Post Content -->
+    <!-- Banner at the Top -->
     <TextView
-        android:id="@+id/post_titleDP"
-        android:layout_width="match_parent"
+        android:id="@+id/banner_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:lineSpacingExtra="4dp"
-        android:layout_marginTop="5dp"
-        android:paddingBottom="8dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
-        android:textColor="#38343a"
-        android:textSize="14sp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="29dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="THREADLY"
+        android:textColor="@color/violet"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/post_bodyDP"
+    <!-- Content Section (scrollable) -->
+    <ScrollView
+        android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:lineSpacingExtra="4dp"
-        android:paddingBottom="8dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
-        android:textColor="#38343a"
-        android:textSize="13sp" />
-
-    <!-- Like and Comment Count -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
-
-        <!-- Like Section -->
-        <TextView
-            android:id="@+id/like_countPD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="123"
-            android:textColor="#888888"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Likes"
-            android:textColor="#888888"
-            android:textSize="12sp" />
-
-        <!-- Comment Section -->
-        <TextView
-            android:id="@+id/comment_countPD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="45"
-            android:textColor="#888888"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Comments"
-            android:textColor="#888888"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <!-- Comments Section -->
-    <LinearLayout
-        android:id="@+id/comments_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_below="@id/banner_title"
         android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
         android:paddingBottom="16dp">
 
-        <!-- Comment Input -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp">
+            android:orientation="vertical"
+            android:background="@color/white">
 
-            <!-- User Profile Picture -->
-            <ImageView
-                android:id="@+id/profile_pic_input"
-                android:layout_width="47dp"
-                android:layout_height="48dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="-2dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_default_pfp" />
-
-            <!-- Comment Input Field -->
-            <RelativeLayout
+            <!-- Header Section -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_toEndOf="@id/profile_pic_input"
-                android:background="@drawable/inputfield"
-                android:paddingEnd="8dp"
-                android:paddingStart="12dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
 
-                <EditText
-                    android:id="@+id/comment_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@id/post_comment_text"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Write a comment..."
-                    android:inputType="text"
-                    android:textColor="#000"
+                <!-- User Profile Picture -->
+                <ImageView
+                    android:id="@+id/imageViewPFPPD"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_default_pfp"
+                    android:layout_marginBottom="9dp" />
+
+                <!-- User Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/fullnamePD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Ky Yanga"
+                        android:textColor="#38343a"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/usernamePD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="_kylamaeee"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/created_atPD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="1 day ago"
+                        android:textColor="#888888"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Post Content -->
+            <TextView
+                android:id="@+id/post_titleDP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="8dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
+                android:textColor="#38343a"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/post_bodyDP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="8dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
+                android:textColor="#38343a"
+                android:textSize="13sp" />
+
+            <!-- Like and Comment Count -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/like_countPD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    android:textColor="#888888"
                     android:textSize="12sp" />
 
-                <!-- Post Comment Button -->
                 <TextView
-                    android:id="@+id/post_comment_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="Post"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Likes"
                     android:textColor="#888888"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-        </RelativeLayout>
+                    android:textSize="12sp" />
 
-        <!-- List of Comments -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleViewComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:scrollbars="vertical" />
-    </LinearLayout>
-</LinearLayout>
+                <TextView
+                    android:id="@+id/comment_countPD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="45"
+                    android:textColor="#888888"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Comments"
+                    android:textColor="#888888"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Comments Section -->
+            <LinearLayout
+                android:id="@+id/comments_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- Comment Input -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/profile_pic_input"
+                        android:layout_width="47dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="-2dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_default_pfp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_toEndOf="@id/profile_pic_input"
+                        android:background="@drawable/inputfield"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="12dp">
+
+                        <EditText
+                            android:id="@+id/comment_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Write a comment..."
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/post_comment_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="Post"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <!-- List of Comments -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
