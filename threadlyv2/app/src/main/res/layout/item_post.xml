@@ -95,7 +95,8 @@
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="2dp"
                     android:text="empore incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
-                    android:textColor="#38343a" />
+                    android:textColor="#38343a"
+                    android:textSize="13sp" />
 
                 <!-- Interaction Row (Likes and Comments aligned horizontally) -->
                 <LinearLayout

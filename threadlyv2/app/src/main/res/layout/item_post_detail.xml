@@ -18,10 +18,9 @@
         <ImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:src="@drawable/ic_default_pfp"
-            android:scaleType="centerCrop"
             android:layout_marginEnd="8dp"
-            />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_pfp" />
 
         <!-- User Info -->
         <LinearLayout
@@ -47,19 +46,17 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="_kylamaeee"
                 android:textColor="#888888"
-                android:textSize="12sp"
-                />
-
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/post_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:fontFamily="@font/poppins_regular"
                 android:text="1 day ago"
                 android:textColor="#888888"
-                android:layout_marginTop="-30dp"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -77,7 +74,7 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/psot_bodyDP"
+        android:id="@+id/post_bodyDP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
@@ -85,10 +82,7 @@
         android:paddingBottom="8dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
         android:textColor="#38343a"
-        android:textSize="14sp" />
-
-
-    <!-- Comment Input Section -->
+        android:textSize="13sp" />
 
     <!-- Like and Comment Count -->
     <LinearLayout
@@ -99,114 +93,117 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
-        <!-- Like Icon and Count -->
-
-
+        <!-- Like Section -->
         <TextView
             android:id="@+id/like_countPD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123"
             android:textColor="#888888"
-            android:textSize="12sp"
-            android:layout_marginEnd="16dp" />
+            android:textSize="12sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Likes"
             android:textColor="#888888"
-            android:textSize="12sp"
-            android:layout_marginStart="-10dp" />
+            android:textSize="12sp" />
 
-        <!-- Comment Icon and Count -->
-
+        <!-- Comment Section -->
         <TextView
             android:id="@+id/comment_countPD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45 "
             android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="45"
             android:textColor="#888888"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Comments"
             android:textColor="#888888"
             android:textSize="12sp" />
     </LinearLayout>
 
     <!-- Comments Section -->
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
-
-        <!-- User Profile Picture (Inside Input Area) -->
-        <ImageView
-            android:id="@+id/profile_pic_input"
-            android:layout_width="47dp"
-            android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_default_pfp" />
-
-        <!-- Comment Input Field -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_toEndOf="@id/profile_pic_input"
-            android:background="@drawable/inputfield"
-            android:paddingEnd="8dp"
-            android:paddingStart="12dp">
-
-            <EditText
-                android:theme="@style/CustomHintStyle"
-                android:id="@+id/comment_input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toStartOf="@id/post_comment_text"
-                android:hint="Write a comment..."
-                android:inputType="text"
-                android:background="@android:color/transparent"
-                android:paddingEnd="50dp"
-                android:textColor="#000"
-                android:textSize="12sp" />
-
-            <!-- Text Button -->
-            <TextView
-                android:id="@+id/post_comment_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="Post"
-                android:textColor="#888888"
-                android:textSize="14sp" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-</RelativeLayout>
-
-
     <LinearLayout
         android:id="@+id/comments_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="16dp">
 
-        <!-- Comment 1 -->
-        <LinearLayout
+        <!-- Comment Input -->
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
 
+            <!-- User Profile Picture -->
+            <ImageView
+                android:id="@+id/profile_pic_input"
+                android:layout_width="47dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="-2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_default_pfp" />
+
+            <!-- Comment Input Field -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/profile_pic_input"
+                android:background="@drawable/inputfield"
+                android:paddingEnd="8dp"
+                android:paddingStart="12dp">
+
+                <EditText
+                    android:id="@+id/comment_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/post_comment_text"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Write a comment..."
+                    android:inputType="text"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <!-- Post Comment Button -->
+                <TextView
+                    android:id="@+id/post_comment_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="Post"
+                    android:textColor="#888888"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- List of Comments -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+</LinearLayout>
