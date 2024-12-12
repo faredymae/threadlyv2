@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_LIKE = "like";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 6); // Incremented version
+        super(context, DATABASE_NAME, null, 1); // Incremented version
     }
 
     @Override
@@ -63,12 +63,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Create likes table
             db.execSQL("CREATE TABLE " + TABLE_NAME_LIKE + " (" +
-                    "like_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "post_id INTEGER NOT NULL, " +
-                    "user_id INTEGER NOT NULL, " +
-                    "PRIMARY KEY(post_id, user_id), " + // Composite key to prevent duplicate likes
-                    "FOREIGN KEY(post_id) REFERENCES " + TABLE_NAME_POST + "(post_id), " +
-                    "FOREIGN KEY(user_id) REFERENCES " + TABLE_NAME_USER + "(id))");
+                    "like_id INTEGER PRIMARY KEY, " +   // Primary key for the like_id column
+                    "post_id INTEGER NOT NULL, " +      // Post ID being liked
+                    "user_id INTEGER NOT NULL, " +      // User ID who likes the post
+                    "FOREIGN KEY(post_id) REFERENCES " + TABLE_NAME_POST + "(post_id), " +  // Foreign key to posts table
+                    "FOREIGN KEY(user_id) REFERENCES " + TABLE_NAME_USER + "(id), " +       // Foreign key to users table
+                    "UNIQUE(post_id, user_id))");        // Composite unique constraint to prevent duplicate likes
+
         } catch (Exception e) {
             Log.e("DB_ERROR", "Error creating tables: " + e.getMessage());
         }
@@ -77,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 5) {  // If the database version is less than 2, upgrade it
+         {  // If the database version is less than 2, upgrade it
             // Add the like_id column to the likes table
             db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIKE + " (" +
                     "like_id INTEGER PRIMARY KEY AUTOINCREMENT, ))");
