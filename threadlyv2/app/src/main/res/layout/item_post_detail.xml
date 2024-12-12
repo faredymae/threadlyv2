@@ -1,0 +1,212 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    android:padding="16dp">
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp">
+
+        <!-- User Profile Picture -->
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_default_pfp"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="8dp"
+            />
+
+        <!-- User Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/fullnamePD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Ky Yanga"
+                android:textColor="#38343a"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/usernamePD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="_kylamaeee"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                />
+
+
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="1 day ago"
+                android:textColor="#888888"
+                android:layout_marginTop="-30dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Post Content -->
+    <TextView
+        android:id="@+id/post_titleDP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="8dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
+        android:textColor="#38343a"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/psot_bodyDP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="8dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empor incididunt ut labore et dolore magna aliqua."
+        android:textColor="#38343a"
+        android:textSize="14sp" />
+
+
+    <!-- Comment Input Section -->
+
+    <!-- Like and Comment Count -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <!-- Like Icon and Count -->
+
+
+        <TextView
+            android:id="@+id/like_countPD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:layout_marginEnd="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Likes"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:layout_marginStart="-10dp" />
+
+        <!-- Comment Icon and Count -->
+
+        <TextView
+            android:id="@+id/comment_countPD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45 "
+            android:layout_marginStart="15dp"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:text="Comments"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Comments Section -->
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <!-- User Profile Picture (Inside Input Area) -->
+        <ImageView
+            android:id="@+id/profile_pic_input"
+            android:layout_width="47dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_pfp" />
+
+        <!-- Comment Input Field -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_toEndOf="@id/profile_pic_input"
+            android:background="@drawable/inputfield"
+            android:paddingEnd="8dp"
+            android:paddingStart="12dp">
+
+            <EditText
+                android:theme="@style/CustomHintStyle"
+                android:id="@+id/comment_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@id/post_comment_text"
+                android:hint="Write a comment..."
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                android:paddingEnd="50dp"
+                android:textColor="#000"
+                android:textSize="12sp" />
+
+            <!-- Text Button -->
+            <TextView
+                android:id="@+id/post_comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="Post"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/comments_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Comment 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+
