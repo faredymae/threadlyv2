@@ -316,6 +316,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(searchQuery, new String[]{"%" + query + "%", "%" + query + "%"});
     }
 
+    public List<Post> getPostsByUser(int userId) {
+        List<Post> posts = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Use user ID instead of username
+        String query = "SELECT posts.post_id, posts.post_title, posts.post_body, posts.created_at, posts.like_count, " +
+                "posts.comment_count, allusers.profile_picture, allusers.fullname, allusers.username " +
+                "FROM posts " +
+                "INNER JOIN allusers ON posts.username = allusers.username " +
+                "WHERE allusers.id = ? AND posts.deleted = 0";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int postId = cursor.getInt(cursor.getColumnIndex("post_id"));
+                String fullname = cursor.getString(cursor.getColumnIndex("fullname"));
+                String fetchedUsername = cursor.getString(cursor.getColumnIndex("username"));
+                String postTitle = cursor.getString(cursor.getColumnIndex("post_title"));
+                String postBody = cursor.getString(cursor.getColumnIndex("post_body"));
+                String createdAt = cursor.getString(cursor.getColumnIndex("created_at"));
+                int likeCount = cursor.getInt(cursor.getColumnIndex("like_count"));
+                int commentCount = cursor.getInt(cursor.getColumnIndex("comment_count"));
+                String profileImageUri = cursor.getString(cursor.getColumnIndex("profile_picture"));
+
+                boolean isLikedByUser = false;
+
+                // Log the post details
+                Log.d("getPostsByUser", "Post ID: " + postId + ", Title: " + postTitle);
+
+                posts.add(new Post(postId, fullname, fetchedUsername, postTitle, postBody, likeCount, commentCount, createdAt, profileImageUri, isLikedByUser));
+            }
+            cursor.close();
+        }
+
+        Log.d("getPostsByUser", "Total posts fetched: " + posts.size());
+        return posts;
+    }
+
+
+
+
 
 
 
