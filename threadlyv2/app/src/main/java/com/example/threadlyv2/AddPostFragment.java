@@ -35,9 +35,10 @@ public class AddPostFragment extends Fragment {
 
             // Retrieve the logged-in username
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
-            String username = sharedPreferences.getString("username", null);
+            String username = sharedPreferences.getString("currentUsername", null);
 
-            if (username == null) {
+            int userId = sharedPreferences.getInt("currentUserId", -1);
+            if (username == null || userId == -1) {
                 Toast.makeText(getActivity(), "User is not logged in. Please log in to post.", Toast.LENGTH_SHORT).show();
                 return;
             }

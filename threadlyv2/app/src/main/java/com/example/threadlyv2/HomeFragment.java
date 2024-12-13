@@ -1,6 +1,7 @@
 package com.example.threadlyv2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Retrieve user session
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        int currentUserId = sharedPreferences.getInt("currentUserId", -1);
+
+        if (currentUserId == -1) {
+            Toast.makeText(getActivity(), "User not logged in. Please login.", Toast.LENGTH_SHORT).show();
+            // Redirect to login screen
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+            return view;
+        }
 
         // Initialize database helper
         databaseHelper = new DatabaseHelper(getActivity());

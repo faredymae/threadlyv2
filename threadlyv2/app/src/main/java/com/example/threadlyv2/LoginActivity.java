@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Save user session details in SharedPreferences
                     SharedPreferences sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear(); // Clear previous session data
                     editor.putInt("currentUserId", userId);  // Save user ID
                     editor.putString("currentUsername", username); // Save username
                     editor.apply();
