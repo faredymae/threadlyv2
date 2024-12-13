@@ -9,6 +9,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "threadlyv2.db";
@@ -235,6 +238,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return isLiked;
     }
+
+
+
+    // Retrieve all comments for a specific post
+    // In DatabaseHelper class
+    public List<Comment> getCommentsForPost(int postId) {
+        List<Comment> comments = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT comments.comment_id, comments.post_id, comments.user_id, comments.comment_text, " +
+                "comments.created_at, comments.deleted, allusers.fullname, allusers.username " +
+                "FROM comments " +
+                "JOIN allusers ON comments.user_id = allusers.id " +
+                "WHERE comments.post_id = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(postId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int commentId = cursor.getInt(cursor.getColumnIndex("comment_id"));
+                int postIdValue = cursor.getInt(cursor.getColumnIndex("post_id"));
+                int userId = cursor.getInt(cursor.getColumnIndex("user_id"));
+                String commentText = cursor.getString(cursor.getColumnIndex("comment_text"));
+                String createdAt = cursor.getString(cursor.getColumnIndex("created_at"));
+                boolean deleted = cursor.getInt(cursor.getColumnIndex("deleted")) == 1;
+                String fullName = cursor.getString(cursor.getColumnIndex("fullname"));
+                String username = cursor.getString(cursor.getColumnIndex("username"));
+
+                // Create a new Comment object using the updated constructor
+                Comment comment = new Comment(commentId, postIdValue, userId, commentText, createdAt, deleted, fullName, username);
+                comments.add(comment);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return comments;
+    }
+
+
+    // (Optional) Delete or soft-delete a comment
+    public int deleteComment(int commentId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("deleted", 1); // Mark as deleted
+
+        return db.update(TABLE_NAME_COMMENT, values, "comment_id = ?", new String[]{String.valueOf(commentId)});
+    }
+
+    public long insertComment(Comment comment) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("post_id", comment.getPostId());
+        values.put("user_id", comment.getUserId());
+        values.put("comment_text", comment.getCommentText());
+        values.put("created_at", comment.getCreatedAt());
+        values.put("deleted", comment.isDeleted() ? 1 : 0); // Convert boolean to integer
+
+        return db.insert(TABLE_NAME_COMMENT, null, values);
+    }
+
+
+    // In your DatabaseHelper class
+    public int getUserId(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int userId = -1;
+
+        Cursor cursor = db.rawQuery("SELECT id FROM allusers WHERE username = ?", new String[]{username});
+        if (cursor != null && cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndex("id"));
+            cursor.close();
+        }
+        return userId;
+    }
+
+
+
+
 
 
 

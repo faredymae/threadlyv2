@@ -7,16 +7,47 @@ public class Comment {
     private String commentText;  // Corresponds to "comment_text"
     private String createdAt;    // Corresponds to "created_at"
     private boolean deleted;     // Corresponds to "deleted"
+    private String fullName; // New field
+
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    private String username; // New field
 
     // Constructor
-    public Comment(int commentId, int postId, int userId, String commentText, String createdAt, boolean deleted) {
+    public Comment(int commentId, int postId, int userId, String commentText, String createdAt, boolean deleted, String fullName, String username) {
         this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
         this.commentText = commentText;
         this.createdAt = createdAt;
         this.deleted = deleted;
+        this.fullName = fullName;
+        this.username = username;
+
     }
+    public Comment(int postId, int userId, String commentText, String createdAt, boolean deleted) {
+        this.postId = postId;
+        this.userId = userId;
+        this.commentText = commentText;
+        this.createdAt = createdAt;
+        this.deleted = deleted;
+    }
+
 
     // Getter and Setter methods
 
