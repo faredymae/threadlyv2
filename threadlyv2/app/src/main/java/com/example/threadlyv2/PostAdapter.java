@@ -208,7 +208,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public void updatePostList(List<Post> newPostList) {
-        this.postList = newPostList;
+        this.postList.clear();
+        this.postList.addAll(newPostList);
         notifyDataSetChanged();
     }
+
 }
+

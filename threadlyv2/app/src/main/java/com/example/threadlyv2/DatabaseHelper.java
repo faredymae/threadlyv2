@@ -310,6 +310,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userId;
     }
 
+    public Cursor searchPosts(String query) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String searchQuery = "SELECT * FROM posts WHERE post_title LIKE ? OR post_body LIKE ?";
+        return db.rawQuery(searchQuery, new String[]{"%" + query + "%", "%" + query + "%"});
+    }
+
+
 
 
 
