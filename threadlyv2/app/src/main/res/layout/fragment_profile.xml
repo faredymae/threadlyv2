@@ -35,55 +35,56 @@
     <!-- Profile Image -->
 
     <!-- User's Full Name -->
+
+    <!-- User's Username -->
+
+    <!-- Logout Button -->
+
+    <!-- User Posts RecyclerView -->
+
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_default_pfp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-    <!-- User's Username -->
 
     <TextView
         android:id="@+id/profTVName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Kyla Mae Yanga"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="228dp" />
-
-    <!-- Logout Button -->
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <TextView
         android:id="@+id/profTVUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_regular"
         android:text="_kylamaeee"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profTVName" />
-
-    <!-- User Posts RecyclerView -->
 
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="102dp"
         android:layout_height="41dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/btn"
         android:fontFamily="@font/poppins_semibold"
         android:paddingHorizontal="20dp"
@@ -98,9 +99,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUserPosts"
 
-        android:layout_marginTop="50dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="50dp"
         android:clipToPadding="false"
         android:padding="16dp"
         android:scrollbars="vertical"
@@ -109,6 +110,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoutBtn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

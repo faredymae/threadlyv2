@@ -355,6 +355,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return posts;
     }
 
+    public String getUserFullName(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT fullname FROM allusers WHERE id = ?", new String[]{String.valueOf(userId)});
+        if (cursor != null && cursor.moveToFirst()) {
+            String fullName = cursor.getString(cursor.getColumnIndex("fullname"));
+            cursor.close();
+            return fullName;
+        }
+        return null;
+    }
+
+
 
 
 

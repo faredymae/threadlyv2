@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NotificationFragment">
 
-    <!-- Removed unnecessary nested ConstraintLayout -->
+    <!-- Banner Section -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -14,23 +15,138 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for the title -->
+        <!-- Title TextView -->
         <TextView
             android:id="@+id/banner_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
-            android:gravity="start"
             android:text="THREADLY"
             android:textColor="@color/violet"
             android:textSize="24sp"
             android:textStyle="bold" />
-
     </LinearLayout>
+
+    <!-- Notification 1 -->
+    <LinearLayout
+        android:id="@+id/notification1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profile_image1"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_pfp" />
+
+        <!-- Notification Content -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <!-- Notification Title -->
+            <TextView
+                android:id="@+id/notification_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="New Post Available"
+                android:textColor="#38343A"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Notification Description -->
+            <TextView
+                android:id="@+id/notification_description1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="A new post has been published by someone you follow."
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <!-- Notification Timestamp -->
+            <TextView
+                android:id="@+id/notification_timestamp1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Just Now"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Notification 2 -->
+    <LinearLayout
+        android:id="@+id/notification2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/notification1">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profile_image2"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_pfp" />
+
+        <!-- Notification Content -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/notification_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="New Comment on Your Post"
+                android:textColor="#38343A"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/notification_description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Your post received a new comment."
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/notification_timestamp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="2 mins ago"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Add more notification blocks as needed by duplicating the LinearLayout block for each notification -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

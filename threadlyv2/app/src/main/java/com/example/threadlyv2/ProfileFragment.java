@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -53,6 +54,8 @@ public class ProfileFragment extends Fragment {
         profileImageView = rootView.findViewById(R.id.profileImageView);
         recyclerViewUserPosts = rootView.findViewById(R.id.recyclerViewUserPosts);
         logoutBtn = rootView.findViewById(R.id.logoutBtn);
+        TextView profTVName = rootView.findViewById(R.id.profTVName);  // Full Name TextView
+        TextView profTVUserName = rootView.findViewById(R.id.profTVUserName);  // Username TextView
 
         // Set up RecyclerView
         recyclerViewUserPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -67,6 +70,13 @@ public class ProfileFragment extends Fragment {
         if (currentUserId != -1) {
             // Load and display user posts
             loadUserPosts();
+
+            // Load user's full name from the database (assuming you have a method for this)
+            String fullName = databaseHelper.getUserFullName(currentUserId);
+            profTVName.setText(fullName);
+
+            // Use static value for testing username
+            profTVUserName.setText("TestUsername");  // Static value for testing
         } else {
             Log.e("ProfileFragment", "Invalid user ID");
             Toast.makeText(requireContext(), "Unable to load posts", Toast.LENGTH_SHORT).show();
@@ -87,6 +97,8 @@ public class ProfileFragment extends Fragment {
 
         return rootView;
     }
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
